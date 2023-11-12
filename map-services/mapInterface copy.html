@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Fleet Manager Map Interface</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- Inserting Mapbox GL JS files -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+
+<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+<link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
+
+<style>
+body {
+margin: 0;
+padding: 0;
+}
+#map {
+position: absolute;
+top: 0;
+bottom: 0;
+width: 100%;
+}
+/* generic marker tag: */
+.marker {
+background-image: url('mapbox-icon.png');
+background-size: cover;
+width: 50px;
+height: 50px;
+border-radius: 50%;
+cursor: pointer;
+}
+.vehicleMarker {
+background-image: url('car-icon.png');
+background-size: cover;
+width: 50px;
+height: 50px;
+border-radius: 50%;
+cursor: pointer;
+}
+.pickupMarker {
+background-image: url('person-icon.png');
+background-size: cover;
+width: 50px;
+height: 50px;
+border-radius: 50%;
+cursor: pointer;
+}
+.dropoffMarker {
+background-image: url('hospital-icon.png');
+background-size: cover;
+width: 50px;
+height: 50px;
+border-radius: 50%;
+cursor: pointer;
+}
+.mapboxgl-popup {
+max-width: 200px;
+}
+.mapboxgl-popup-content {
+text-align: center;
+font-family: 'Open Sans', sans-serif;
+}
+#menu {
+position: absolute;
+background: #efefef;
+padding: 10px;
+font-family: 'Open Sans', sans-serif;
+}
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<!-- set up menu for map style: -->
+  <!-- See a list of Mapbox-hosted public styles at -->
+  <!-- https://docs.mapbox.com/api/maps/styles/#mapbox-styles -->
+<!-- <div id="menu">
+  <input id="streets-v11" type="radio" name="rtoggle" value="streets" checked="checked">
+  <label for="streets-v11">streets</label>
+  <input id="light-v10" type="radio" name="rtoggle" value="light">
+  <label for="light-v10">light</label>
+  <input id="dark-v10" type="radio" name="rtoggle" value="dark">
+  <label for="dark-v10">dark</label>
+  <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors">
+  <label for="outdoors-v11">outdoors</label>
+  <input id="satellite-v9" type="radio" name="rtoggle" value="satellite">
+  <label for="satellite-v9">satellite</label>
+  </div> -->
+ 
+<script>
+
+// Set variables:
+
+// Set Vehicle ID:
+var vehicleID = "WeGo CaR 12";
+// Vehicle GPS Coordinates
+var vehicleCoordinates = [-97.74197567318983, 30.26767853910939];
+// Pickup Location Coordinates
+var pickupLocationCoordinates = [-97.7567006308606, 30.231693805815468];
+// Dropoff Location Coordinates
+var dropoffLocationCoordinates = [-97.74525562901353, 30.30578654912567];
+// Pickup Location Address
+var pickupLocationHTML = "<h3> Pickup Location </h3> <p> 3001 S. Congress Ave </p> <p> Austin, TX 78704 </p>"
+// Dropoff Location Address
+var dropoffLocationHTML = "<h3> Drop-off Location </h3> <p> 1201 W. 38th Street </p> <p> Austin, TX 78705 </p>"
+
+// Mapbox Access Token:
+mapboxgl.accessToken = 'pk.eyJ1Ijoic2V1dGVhbTIzIiwiYSI6ImNrems3ajRwYjMwd3Mydmt1bzZiNnM5ZGEifQ.4aE9gX3_ChQ8QO9m2aGBZA';
+
+
+// map properties
+var map = new mapboxgl.Map({
+container: 'map',
+// style: 'mapbox://styles/mapbox/streets-v11', // shows streets map
+style: 'mapbox://styles/mapbox/navigation-day-v1', // shows traffic information
+center: vehicleCoordinates,
+zoom: 12
+});
+
+// ***********************************************
+// ********** ADD SELECTED STYLE TO MAP **********
+// ***********************************************
+
+// disabled for now as it blocks loading routes
+
+// const layerList = document.getElementById('menu');
+// const inputs = layerList.getElementsByTagName('input');
+ 
+// for (const input of inputs) {
+// input.onclick = (layer) => {
+// const layerId = layer.target.id;
+// map.setStyle('mapbox://styles/mapbox/' + layerId);
+// };
+// }
+
+// add navigation and pitch control to map:
+const nav = new mapboxgl.NavigationControl();
+map.addControl(nav, 'bottom-right');
+
+// vehicle marker:
+// const vehicleMarker = new mapboxgl.Marker({
+//   color: "#000DD7",
+//   dragable: false
+// })
+//   .setLngLat (vehicleCoordinates)
+//   .setPopup (new mapboxgl.Popup().setHTML("<h3> Vehicle Location </h3>"))
+//   // .className (carMarker)
+//   .addTo(map);
+
+// // pickup location marker:
+// const pickupLocationMarker = new mapboxgl.Marker({
+//   color: "#02C122",
+//   dragable: false
+// })
+//   .setLngLat (pickupLocationCoordinates)
+//   .setPopup (new mapboxgl.Popup().setHTML(pickupLocationHTML))
+//   .addTo(map);
+
+// // dropoff location marker:
+// const dropoffLocationMarker = new mapboxgl.Marker({
+//   color: "#D7000A",
+//   dragable: false
+// })
+//   .setLngLat (dropoffLocationCoordinates)
+//   .setPopup (new mapboxgl.Popup().setHTML(dropoffLocationHTML))
+//   .addTo(map);
+ 
+// const geojson = {
+  const vehicleGeojson = {
+  'type': 'FeatureCollection',
+  'features': [
+    {
+    'type': 'Feature',
+    'geometry': {
+      'type': 'Point',
+      'coordinates': vehicleCoordinates
+      },
+    'properties': {
+      'title': 'VehicleID',
+      'description': vehicleID
+      }
+    },
+  ]
+};
+  const pickupGeojson = {
+    'type': 'FeatureCollection',
+    'features': [
+    {
+    'type': 'Feature',
+    'geometry': {
+      'type': 'Point',
+      'coordinates': pickupLocationCoordinates
+      },
+    'properties': {
+      'title': 'Pickup Location',
+      'description': pickupLocationHTML
+      }
+    },
+  ]
+};
+  const dropoffGeojson = {
+    'type': 'FeatureCollection',
+    'features': [
+    {
+    'type': 'Feature',
+    'geometry': {
+      'type': 'Point',
+      'coordinates': dropoffLocationCoordinates 
+      },
+    'properties': {
+      'title': 'Dropoff Location',
+      'description': dropoffLocationHTML
+      }
+    }
+  ]
+};
+
+// add location markers to map:
+
+// add vehicle marker to map:
+for (const feature of vehicleGeojson.features) {
+// create a HTML element for each feature
+const el = document.createElement('div');
+el.className = 'vehicleMarker';
+
+// make a marker for vehicle location feature and add it to the map
+new mapboxgl.Marker(el)
+.setLngLat(feature.geometry.coordinates)
+.setPopup(
+new mapboxgl.Popup({ offset: 25 }) // add popups
+.setHTML(
+// `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
+`<h3>${feature.properties.description}</h3>`
+)
+
+)
+.addTo(map);
+}
+
+// add pickup location marker to map:
+for (const feature of pickupGeojson.features) {
+// create a HTML element for each feature
+const el = document.createElement('div');
+el.className = 'pickupMarker';
+
+// make a marker pickup location feature and add it to the map
+new mapboxgl.Marker(el)
+.setLngLat(feature.geometry.coordinates)
+.setPopup(
+new mapboxgl.Popup({ offset: 25 }) // add popups
+.setHTML(
+// `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
+`<h3>${feature.properties.description}</h3>`)
+
+)
+.addTo(map);
+}
+
+// add dropoff location marker to map:
+for (const feature of dropoffGeojson.features) {
+// create a HTML element for each feature
+const el = document.createElement('div');
+el.className = 'dropoffMarker';
+ 
+// make a marker for dropoff location feature and add it to the map
+new mapboxgl.Marker(el)
+.setLngLat(feature.geometry.coordinates)
+.setPopup(
+new mapboxgl.Popup({ offset: 25 }) // add popups
+.setHTML(
+// `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
+`<h3>${feature.properties.description}</h3>`)
+
+)
+.addTo(map);
+}
+
+// adding routes to the map:
+
+// **********VEHICLE TO PICKUP LOCATION ROUTE**********
+
+//"Arbitrary" start point of the route:
+const start1 = vehicleCoordinates;
+const end1 = pickupLocationCoordinates;
+
+// create a function to make a directions request
+async function getRoute1(end1) {
+  // make a directions request using driving profile
+  // an arbitrary start will always be the same
+  // only the end or destination will change
+  const query = await fetch(
+    `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${start1[0]},${start1[1]};${end1[0]},${end1[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
+    { method: 'GET' }
+  );
+  const json = await query.json();
+  const data = json.routes[0];
+  const route1 = data.geometry.coordinates;
+  const geojson = {
+    type: 'Feature',
+    properties: {},
+    geometry: {
+      type: 'LineString',
+      coordinates: route1
+    }
+  };
+  // if the route already exists on the map, we'll reset it using setData
+  if (map.getSource('route1')) {
+    map.getSource('route1').setData(geojson);
+  }
+  // otherwise, we'll make a new request
+  else {
+    map.addLayer({
+      id: 'route1',
+      type: 'line',
+      source: {
+        type: 'geojson',
+        data: geojson
+      },
+      layout: {
+        'line-join': 'round',
+        'line-cap': 'round'
+      },
+      paint: {
+        'line-color': '#FF00F7',
+        'line-width': 5,
+        'line-opacity': 0.75
+      }
+    });
+  }
+}
+
+// **********PICKUP LOCATION TO DROP-OFF LOCATION ROUTE**********
+
+const start2 = pickupLocationCoordinates;
+const end2 = dropoffLocationCoordinates;
+
+// create a function to make a directions request
+async function getRoute2(end2) {
+  // make a directions request using driving profile
+  // an arbitrary start will always be the same
+  // only the end or destination will change
+  const query = await fetch(
+    `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${start2[0]},${start2[1]};${end2[0]},${end2[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
+    { method: 'GET' }
+  );
+  const json = await query.json();
+  const data = json.routes[0];
+  const route2 = data.geometry.coordinates;
+  const geojson = {
+    type: 'Feature',
+    properties: {},
+    geometry: {
+      type: 'LineString',
+      coordinates: route2
+    }
+  };
+  // if the route already exists on the map, we'll reset it using setData
+  if (map.getSource('route2')) {
+    map.getSource('route2').setData(geojson);
+  }
+  // otherwise, we'll make a new request
+  else {
+    map.addLayer({
+      id: 'route2',
+      type: 'line',
+      source: {
+        type: 'geojson',
+        data: geojson
+      },
+      layout: {
+        'line-join': 'round',
+        'line-cap': 'round'
+      },
+      paint: {
+        'line-color': '#FF9A00',
+        'line-width': 5,
+        'line-opacity': 0.75
+      }
+    });
+  }
+}
+
+
+// ********** LOAD ROUTES ON MAP **********
+
+
+map.on('load', () => {
+  // make an initial directions request that
+  // starts and ends at the same location
+  getRoute1(pickupLocationCoordinates);
+  getRoute2(dropoffLocationCoordinates);
+});
+
+
+</script>
+</body>
+</html>
