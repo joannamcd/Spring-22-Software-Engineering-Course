@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html>
+    <link rel="stylesheet" href="/common-front-end/globalCSS01.css">
+    <head>
+      <img src="https://i.imgur.com/saNtDz7.png" alt="WeGo logo with Car" style="width:15%;height:auto;">
+  	<link rel='stylesheet' type='text/css' href="/common-front-end/globalCSS01.css">
+    </head>
+
+<body onload="loginCheck()" class="accountBody">
+  <div class="topnav">
+    <a href="https://demand.team23.sweispring22.gq/homepage.html">Home</a>
+    <a href="https://demand.team23.sweispring22.gq/demand-front-end/taasUserCreateAccount.html">Create Account</a>
+    <a href="https://demand.team23.sweispring22.gq/common-front-end/login.html">Login</a>
+    <a class="active" href="https://demand.team23.sweispring22.gq/demand-front-end/orderForm.html">Order</a>
+  </div>
+  
+
+  <section class="order-form">
+    <div class="form">
+
+    <form name="requestOrderForm" class="mainForm">
+
+		<h1><a href="https://demand.team23.sweispring22.gq/">WeGo </a>- Request an Order
+		</h1>
+
+<label>
+  Pickup:
+</label>
+
+    <div class="currentAddress">
+
+        <label>Pickup Address: * </label>
+
+        <input type="text" name="currentLoc" required>
+
+    </div>
+
+    <div class="city1">
+
+            <label>City: *</label>
+
+            <input type="text" name="city1" required>
+
+    </div>
+
+      <div class="state1">
+
+        <label>State: *</label>
+
+        <select name="state1" id="state1" required>
+          <option value="" selected="selected">Select a State</option>
+          <option value="Alabama">Alabama</option>
+          <option value="Alaska">Alaska</option>
+          <option value="Arizona">Arizona</option>
+          <option value="Arkansas">Arkansas</option>
+          <option value="California">California</option>
+          <option value="Colorado">Colorado</option>
+          <option value="Connecticut">Connecticut</option>
+          <option value="Delaware">Delaware</option>
+          <option value="District Of Columbia">District Of Columbia</option>
+          <option value="Florida">Florida</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Hawaii">Hawaii</option>
+          <option value="Idaho">Idaho</option>
+          <option value="Illinois">Illinois</option>
+          <option value="Indiana">Indiana</option>
+          <option value="Iowa">Iowa</option>
+          <option value="Kansas">Kansas</option>
+          <option value="Kentucky">Kentucky</option>
+          <option value="Louisiana">Louisiana</option>
+          <option value="Maine">Maine</option>
+          <option value="Maryland">Maryland</option>
+          <option value="Massachusetts">Massachusetts</option>
+          <option value="Michigan">Michigan</option>
+          <option value="Minnesota">Minnesota</option>
+          <option value="Mississippi">Mississippi</option>
+          <option value="Missouri">Missouri</option>
+          <option value="Montana">Montana</option>
+          <option value="Nebraska">Nebraska</option>
+          <option value="Nevada">Nevada</option>
+          <option value="New Hampshire">New Hampshire</option>
+          <option value="New Jersey">New Jersey</option>
+          <option value="New Mexico">New Mexico</option>
+          <option value="New York">New York</option>
+          <option value="North Carolina">North Carolina</option>
+          <option value="North Dakota">North Dakota</option>
+          <option value="Ohio">Ohio</option>
+          <option value="Oklahoma">Oklahoma</option>
+          <option value="Oregon">Oregon</option>
+          <option value="Pennsylvania">Pennsylvania</option>
+          <option value="Rhode Island">Rhode Island</option>
+          <option value="South Carolina">South Carolina</option>
+          <option value="South Dakota">South Dakota</option>
+          <option value="Tennessee">Tennessee</option>
+          <option value="Texas">Texas</option>
+          <option value="Utah">Utah</option>
+          <option value="Vermont">Vermont</option>
+          <option value="Virginia">Virginia</option>
+          <option value="Washington">Washington</option>
+          <option value="West Virginia">West Virginia</option>
+          <option value="Wisconsin">Wisconsin</option>
+          <option value="Wyoming">Wyoming</option>
+        </select>
+
+
+    </div>
+
+    <div class="zip1">
+
+            <label>Zip Code: *</label>
+
+            <input type="text" name="zip1"  pattern="(^\d{5}$)|(^\d{9}$)|(^\d{5}-\d{4}$)" title="Must be a valid zip" required>
+
+   </div>
+
+
+   <label>
+    Destination:
+  </label>
+
+   <div class="destinationAddress">
+
+    <label>Destination Address: * </label>
+
+    <input type="text" name="destinationLoc" required>
+
+
+</div>
+
+
+   <div class="city2">
+
+    <label>City: *</label>
+
+    <input type="text" name="city2" required>
+
+</div>
+
+<div class="state2">
+
+<label>State: *</label>
+
+    <select name="state2" id="state2" required>
+              <option value="" selected="selected">Select a State</option>
+              <option value="Alabama">Alabama</option>
+              <option value="Alaska">Alaska</option>
+              <option value="Arizona">Arizona</option>
+              <option value="Arkansas">Arkansas</option>
+              <option value="California">California</option>
+              <option value="Colorado">Colorado</option>
+              <option value="Connecticut">Connecticut</option>
+              <option value="Delaware">Delaware</option>
+              <option value="District Of Columbia">District Of Columbia</option>
+              <option value="Florida">Florida</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Hawaii">Hawaii</option>
+              <option value="Idaho">Idaho</option>
+              <option value="Illinois">Illinois</option>
+              <option value="Indiana">Indiana</option>
+              <option value="Iowa">Iowa</option>
+              <option value="Kansas">Kansas</option>
+              <option value="Kentucky">Kentucky</option>
+              <option value="Louisiana">Louisiana</option>
+              <option value="Maine">Maine</option>
+              <option value="Maryland">Maryland</option>
+              <option value="Massachusetts">Massachusetts</option>
+              <option value="Michigan">Michigan</option>
+              <option value="Minnesota">Minnesota</option>
+              <option value="Mississippi">Mississippi</option>
+              <option value="Missouri">Missouri</option>
+              <option value="Montana">Montana</option>
+              <option value="Nebraska">Nebraska</option>
+              <option value="Nevada">Nevada</option>
+              <option value="New Hampshire">New Hampshire</option>
+              <option value="New Jersey">New Jersey</option>
+              <option value="New Mexico">New Mexico</option>
+              <option value="New York">New York</option>
+              <option value="North Carolina">North Carolina</option>
+              <option value="North Dakota">North Dakota</option>
+              <option value="Ohio">Ohio</option>
+              <option value="Oklahoma">Oklahoma</option>
+              <option value="Oregon">Oregon</option>
+              <option value="Pennsylvania">Pennsylvania</option>
+              <option value="Rhode Island">Rhode Island</option>
+              <option value="South Carolina">South Carolina</option>
+              <option value="South Dakota">South Dakota</option>
+              <option value="Tennessee">Tennessee</option>
+              <option value="Texas">Texas</option>
+              <option value="Utah">Utah</option>
+              <option value="Vermont">Vermont</option>
+              <option value="Virginia">Virginia</option>
+              <option value="Washington">Washington</option>
+              <option value="West Virginia">West Virginia</option>
+              <option value="Wisconsin">Wisconsin</option>
+              <option value="Wyoming">Wyoming</option>
+            </select>
+
+
+</div>
+
+<div class="zip2">
+
+    <label>Zip Code: *</label>
+
+    <input type="text" name="zip2"  pattern="(^\d{5}$)|(^\d{9}$)|(^\d{5}-\d{4}$)" title="Must be a valid zip" required>
+
+</div>
+           <div class="button">
+
+                <button type="submit" id="requestOrder" value="requestOrder">Request Order</button>
+
+            </div>
+
+
+    </div>
+
+    </form>
+  </section>
+
+  <script type=text/javascript src="orderJavascript.js"></script>
+
+
+</body>
+
+ </html>

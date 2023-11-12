@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+	h1 {text-align: center;}
+	div, iframe {margin: 0 auto;}
+	iframe {display: block; border-style: none;}
+	table {table-layout: fixed; border: 2px black solid;}
+	td {text-align: center;}
+</style>
+<title>View Your Order!</title>
+</head>
+
+<body>
+<h1>View Your Order!</h1>
+<br>
+	<table align="center" width="739" border="0">
+  <tbody>
+    <tr>
+      <td><h2>Vehicle:</h2></td>
+      <td><h2>Pickup Location:</h2></td>
+      <td><h2>Dropoff Location:</h2></td>
+    </tr>
+    <tr>
+      <td id="VehicleID">VehicleID</td>
+      <td>Pickup Street Address</td>
+      <td>Dropoff Street Address</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td id = "StreetAddress">Pickup City, State, Zip</td>
+      <td id = "Dropoff">Dropoff City, State, Zip</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<div>
+	<iframe
+		src="/map-services/customerMapInterface.html"
+		width="50%"
+		height="600px"
+		scrolling="no"
+		title="Vehicle Location"
+	></iframe>
+</div>
+</body>
+
+
+
+<script>
+    document.getElementById("VehicleID").innerHTML = localStorage.getItem("vehicleID");
+    document.getElementById("StreetAddress").innerHTML = localStorage.getItem("pickup_address");
+    document.getElementById("Dropoff").innerHTML = localStorage.getItem("destination_address");
+</script>
+</html>
