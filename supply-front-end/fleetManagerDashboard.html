@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+    <img src="https://i.imgur.com/saNtDz7.png" alt="WeGo logo with Car" style="width:15%;height:auto;">
+    <div class="topnav">
+    <a href="https://demand.team23.sweispring22.gq/homepage.html">Home</a>
+    <a href="https://demand.team23.sweispring22.gq/demand-front-end/taasUserCreateAccount.html">Create User Account</a>
+        <a href="https://supply.team23.sweispring22.gq/supply-front-end/fleetManagerCreateAccount.html">Create FM Account</a>
+    <a href="https://demand.team23.sweispring22.gq/common-front-end/login.html">User Login</a>
+        <a href="https://supply.team23.sweispring22.gq/common-front-end/login.html">FM Login</a>
+  </div>
+<meta charset="UTF-8">
+<style>
+    h1 {text-align: center;}
+    div, iframe {margin: 0 auto;}
+    iframe {display: block; border-style: none;}
+    table {table-layout: fixed; border: 2px black solid;}
+    td {text-align: center;}
+</style>
+<title>Fleet Manager Dashboard</title>
+</head>
+<link rel='stylesheet' type='text/css' href="/common-front-end/globalCSS01.css">
+<body class="homepageBody">
+<h1>Fleet Manager Dashboard</h1>
+<br>
+    <table align="center" width="739" border="0">
+  <tbody>
+    <tr>
+      <td><h2>Vehicle:</h2></td>
+      <td><h2>Pickup Location:</h2></td>
+      <td><h2>Dropoff Location:</h2></td>
+    </tr>
+    <tr>
+      <td>VehicleID</td>
+      <td>Pickup Street Address</td>
+      <td>Dropoff Street Address</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>Pickup City, State, Zip</td>
+      <td>Dropoff City, State, Zip</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<div>
+    <iframe class="fmMap"
+        src="/map-services/fleetManagerMapInterface.html"
+        width="50%"
+        height="600px"
+        scrolling="no"
+        title="Vehicle Location"
+    ></iframe>
+</div>
+</body>
+</html>
